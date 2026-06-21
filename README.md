@@ -31,3 +31,7 @@ To learn more, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+
+
+
+amelore cette porfolio selon les critere suivant sans changer le style de font etles couleur actuel seulement le contenue sur le font tous les font doit etre anime comme sur l'aceuille jusque la contact la forme de contenue de l'acceuille fait comme sur l'image aceuil apres l'aceuil il y a l'appropos selon le style sur l'image et apres l'approche apres mes competence (sur mes competence a chaque fois qu'on clic sur le nom de conmpetence exemple reactjs il sera rediriger vers le site officiel de reactjs ), apres mes service apres mes projet (sur mes projet ajouter des filtre comme sur l'image et sur le contenue il serat rediriger vers un lien qui contien des capture d'ecrant avec des explicaTION ), apres le contact et le bas c'est commet l'image
