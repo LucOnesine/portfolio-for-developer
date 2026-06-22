@@ -1,5 +1,6 @@
 import { Navbar } from '@/components/navbar';
 import { Hero } from '@/components/hero';
+import { About } from '@/components/about';
 import { Approach } from '@/components/approach';
 import { Services } from '@/components/services';
 import { Projects } from '@/components/projects';
@@ -13,6 +14,7 @@ export default function Page() {
       <Navbar />
       <main className="relative">
         <Hero />
+        <About />
         <Approach />
         <Services />
         <Projects />

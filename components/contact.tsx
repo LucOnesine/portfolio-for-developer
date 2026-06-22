@@ -21,13 +21,13 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative min-h-screen py-20 px-6 md:px-12">
+    <section id="contact" className="relative min-h-screen py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
 
-      <div className="relative z-10 max-w-6xl">
+      <div className="relative z-10 max-w-6xl mx-auto w-full">
         {/* Section Header */}
-        <div className="mb-16">
+        <div className="mb-12 sm:mb-16 md:mb-20">
           <div className="inline-block mb-4">
             <span className="text-accent text-sm font-semibold tracking-widest">
               CONTACT

@@ -51,12 +51,12 @@ export function Services() {
   return (
     <section
       id="services"
-      className="relative min-h-screen py-20 px-6 md:px-12 flex items-center"
+      className="relative min-h-screen py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8 flex items-center"
     >
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
 
-      <div className="relative z-10 max-w-6xl">
+      <div className="relative z-10 max-w-6xl mx-auto w-full">
         <style>{`
           @keyframes fadeInUp {
             from {
@@ -71,23 +71,23 @@ export function Services() {
         `}</style>
 
         {/* Section Header */}
-        <div className="mb-16 text-center" style={{ animation: 'fadeInUp 0.8s ease-out' }}>
-          <span className="text-accent text-sm font-semibold tracking-widest">MES SERVICES</span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-4">
+        <div className="mb-12 sm:mb-16 md:mb-20 text-center" style={{ animation: 'fadeInUp 0.8s ease-out' }}>
+          <span className="text-accent text-xs sm:text-sm font-semibold tracking-widest">MES SERVICES</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-3 sm:mt-4">
             <span className="block text-foreground mb-2">Ce que je vous</span>
             <span className="gradient-text">propose</span>
           </h2>
-          <p className="text-muted-foreground text-lg mt-6 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground mt-4 sm:mt-6 max-w-2xl mx-auto px-2">
             Une gamme complète de services pour concrétiser vos projets digitaux.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {services.map((service, index) => (
             <div
               key={service.title}
-              className="group relative overflow-hidden rounded-xl border border-border/50 bg-secondary/20 p-8 hover:bg-secondary/40 transition-all"
+              className="group relative overflow-hidden rounded-xl border border-border/50 bg-secondary/20 p-6 sm:p-8 hover:bg-secondary/40 transition-all"
               style={{
                 animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
               }}
@@ -99,16 +99,16 @@ export function Services() {
 
               {/* Icon */}
               <div
-                className={`mb-6 p-4 w-fit rounded-lg bg-gradient-to-br ${service.gradient} text-white`}
+                className={`mb-4 sm:mb-6 p-3 sm:p-4 w-fit rounded-lg bg-gradient-to-br ${service.gradient} text-white`}
               >
                 {service.icon}
               </div>
 
               {/* Content */}
-              <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 sm:mb-3 group-hover:text-accent transition-colors">
                 {service.title}
               </h3>
-              <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{service.description}</p>
 
               {/* Hover Effect */}
               <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-br from-accent/10 to-transparent rounded-full -mr-10 -mb-10 group-hover:scale-150 transition-transform duration-300" />

@@ -95,11 +95,11 @@ export function Projects() {
       : projects.filter((project) => project.category === activeFilter);
 
   return (
-    <section id="projects" className="relative min-h-screen py-20 px-6 md:px-12">
+    <section id="projects" className="relative min-h-screen py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
 
-      <div className="relative z-10 max-w-6xl">
+      <div className="relative z-10 max-w-6xl mx-auto w-full">
         <style>{`
           @keyframes fadeInUp {
             from {
@@ -114,27 +114,26 @@ export function Projects() {
         `}</style>
 
         {/* Section Header */}
-        <div className="mb-12 text-center" style={{ animation: 'fadeInUp 0.8s ease-out' }}>
-          <h2 className="text-4xl md:text-5xl font-bold">
+        <div className="mb-10 sm:mb-12 md:mb-16 text-center" style={{ animation: 'fadeInUp 0.8s ease-out' }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
             <span className="block text-foreground mb-2">Mes</span>
             <span className="gradient-text">Projets</span>
           </h2>
-          <p className="text-muted-foreground text-lg mt-4 max-w-2xl mx-auto">
-            Découvrez une sélection de mes réalisations récentes, alliant innovation technique et
-            design moderne
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground mt-4 max-w-2xl mx-auto px-2">
+            Découvrez une sélection de mes réalisations récentes, alliant innovation technique et design moderne
           </p>
         </div>
 
         {/* Filter Buttons */}
         <div
-          className="flex flex-wrap justify-center gap-3 mb-16"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12 md:mb-16"
           style={{ animation: 'fadeInUp 0.8s ease-out 0.1s both' }}
         >
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveFilter(category)}
-              className={`px-6 py-2 rounded-full font-semibold transition-all ${
+              className={`px-3 sm:px-6 py-1.5 sm:py-2 rounded-full font-semibold transition-all text-xs sm:text-sm ${
                 activeFilter === category
                   ? 'bg-accent text-accent-foreground'
                   : 'bg-secondary/40 text-foreground border border-border/50 hover:border-accent/50'
@@ -146,58 +145,62 @@ export function Projects() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {filteredProjects.map((project, index) => (
-            <a
+            <div
               key={project.id}
-              href={project.demoLink}
               className="group cursor-pointer"
               style={{
                 animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
               }}
             >
-              <div className="relative h-64 rounded-xl overflow-hidden mb-6 bg-secondary/40 border border-border/50 card-hover">
-                {/* Image Placeholder with Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-blue-500/10 to-transparent flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-4xl font-bold text-accent/30 mb-2">
-                      {project.category}
+              <a
+                href={project.demoLink}
+                className="block"
+              >
+                <div className="relative h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden mb-4 sm:mb-6 bg-secondary/40 border border-border/50 card-hover">
+                  {/* Image Placeholder with Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-blue-500/10 to-transparent flex items-center justify-center">
+                    <div className="text-center px-4">
+                      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-accent/30 mb-1 sm:mb-2">
+                        {project.category}
+                      </div>
+                      <p className="text-muted-foreground text-xs line-clamp-1">{project.title}</p>
                     </div>
-                    <p className="text-muted-foreground text-xs">{project.title}</p>
+                  </div>
+
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Link Icon */}
+                  <div className="absolute top-3 sm:top-4 right-3 sm:right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1">
+                    <div className="p-2 sm:p-3 rounded-lg bg-accent/90 text-accent-foreground">
+                      <ArrowUpRight size={16} />
+                    </div>
+                  </div>
+
+                  {/* Category Badge */}
+                  <div className="absolute top-3 sm:top-4 left-3 sm:left-4">
+                    <span className="text-xs font-semibold text-white bg-accent/80 px-2 sm:px-3 py-1 rounded-full">
+                      {project.category}
+                    </span>
                   </div>
                 </div>
-
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Link Icon */}
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1">
-                  <div className="p-3 rounded-lg bg-accent/90 text-accent-foreground">
-                    <ArrowUpRight size={20} />
-                  </div>
-                </div>
-
-                {/* Category Badge */}
-                <div className="absolute top-4 left-4">
-                  <span className="text-xs font-semibold text-white bg-accent/80 px-3 py-1 rounded-full">
-                    {project.category}
-                  </span>
-                </div>
-              </div>
+              </a>
 
               {/* Project Info */}
               <div>
-                <h3 className="text-lg font-bold text-foreground group-hover:text-accent transition-colors mb-2">
+                <h3 className="text-base sm:text-lg font-bold text-foreground group-hover:text-accent transition-colors mb-1 sm:mb-2 line-clamp-1">
                   {project.title}
                 </h3>
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{project.description}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 line-clamp-2">{project.description}</p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs px-3 py-1 rounded-full bg-accent/10 text-accent border border-accent/30 group-hover:border-accent/60 transition-colors"
+                      className="text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-accent/10 text-accent border border-accent/30 group-hover:border-accent/60 transition-colors"
                     >
                       {tag}
                     </span>
@@ -207,17 +210,15 @@ export function Projects() {
                 {/* Demo Button */}
                 <a
                   href={project.demoLink}
-                  className="inline-flex items-center justify-center w-full gap-2 px-4 py-2 rounded-lg bg-accent text-accent-foreground font-semibold hover:bg-cyan-500 transition-all text-sm"
+                  className="inline-flex items-center justify-center w-full gap-2 px-3 sm:px-4 py-2 rounded-lg bg-accent text-accent-foreground font-semibold hover:bg-cyan-500 transition-all text-xs sm:text-sm"
                 >
                   Démo
-                  <ArrowUpRight size={16} />
+                  <ArrowUpRight size={14} />
                 </a>
               </div>
-            </a>
+            </div>
           ))}
         </div>
-
-
       </div>
     </section>
   );

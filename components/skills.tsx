@@ -92,11 +92,11 @@ const skillCategories: SkillCategory[] = [
 
 export function Skills() {
   return (
-    <section id="skills" className="relative min-h-screen py-20 px-6 md:px-12">
+    <section id="skills" className="relative min-h-screen py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
         <style>{`
           @keyframes fadeInUp {
             from {
@@ -116,39 +116,32 @@ export function Skills() {
         `}</style>
 
         {/* Section Header */}
-        <div className="mb-16 text-center" style={{ animation: 'fadeInUp 0.8s ease-out' }}>
-          <h2 className="text-4xl md:text-5xl font-bold">
+        <div className="mb-12 sm:mb-16 md:mb-20 text-center" style={{ animation: 'fadeInUp 0.8s ease-out' }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
             <span className="block text-foreground mb-2">Mes</span>
             <span className="gradient-text">Compétences</span>
           </h2>
         </div>
 
         {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {skillCategories.map((category, index) => (
             <div
               key={category.title}
-              className="p-6 rounded-lg overflow-hidden"
+              className="p-4 sm:p-6 rounded-lg overflow-hidden"
               style={{
                 animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
                 background: `linear-gradient(135deg, hsl(var(--color-start)) 0%, hsl(var(--color-end)) 100%)`,
               }}
             >
-              {/* Custom CSS for gradient backgrounds */}
-              <style>{`
-                div[style*="${category.title}"] {
-                  background: linear-gradient(135deg, var(--color-1) 0%, var(--color-2) 100%);
-                }
-              `}</style>
-
               {/* Dynamic gradient header */}
-              <div className={`bg-gradient-to-r ${category.bgColor} p-4 rounded-lg mb-6 flex items-center gap-3`}>
-                <div className="text-white">{category.icon}</div>
-                <h3 className="text-white font-bold text-lg">{category.title}</h3>
+              <div className={`bg-gradient-to-r ${category.bgColor} p-3 sm:p-4 rounded-lg mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3`}>
+                <div className="text-white text-sm sm:text-base">{category.icon}</div>
+                <h3 className="text-white font-bold text-base sm:text-lg">{category.title}</h3>
               </div>
 
               {/* Skills List */}
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {category.skills.map((skill) => (
                   <a
                     key={skill.name}
@@ -158,13 +151,13 @@ export function Skills() {
                     className="group block hover:opacity-80 transition-opacity"
                   >
                     {/* Skill Name & Percentage */}
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-white font-semibold text-sm">{skill.name}</span>
-                      <span className="text-white text-sm font-bold">{skill.percentage}%</span>
+                    <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+                      <span className="text-white font-semibold text-xs sm:text-sm">{skill.name}</span>
+                      <span className="text-white text-xs sm:text-sm font-bold">{skill.percentage}%</span>
                     </div>
 
                     {/* Progress Bar */}
-                    <div className="w-full bg-white/20 rounded-full h-2 overflow-hidden">
+                    <div className="w-full bg-white/20 rounded-full h-1.5 sm:h-2 overflow-hidden">
                       <div
                         className={`h-full bg-gradient-to-r ${category.barColor} rounded-full transition-all duration-500`}
                         style={{
