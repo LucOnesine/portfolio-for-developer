@@ -2,178 +2,175 @@
 
 import { Code2, Database, Smartphone, Zap, Cloud, Users } from 'lucide-react';
 
+interface SkillItem {
+  name: string;
+  percentage: number;
+  link: string;
+}
+
 interface SkillCategory {
   title: string;
   icon: React.ReactNode;
-  skills: string[];
-  description: string;
+  skills: SkillItem[];
+  bgColor: string;
+  barColor: string;
 }
 
 const skillCategories: SkillCategory[] = [
   {
     title: 'Frontend',
     icon: <Code2 size={24} />,
-    description: 'Interfaces web modernes et responsives',
-    skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Vue.js', 'Three.js'],
+    bgColor: 'from-blue-600 to-blue-500',
+    barColor: 'from-blue-400 to-cyan-300',
+    skills: [
+      { name: 'React JS', percentage: 90, link: 'https://react.dev' },
+      { name: 'JavaScript', percentage: 90, link: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
+      { name: 'HTML', percentage: 95, link: 'https://developer.mozilla.org/en-US/docs/Web/HTML' },
+      { name: 'CSS', percentage: 85, link: 'https://developer.mozilla.org/en-US/docs/Web/CSS' },
+      { name: 'Tailwind CSS', percentage: 90, link: 'https://tailwindcss.com' },
+    ],
+  },
+  {
+    title: 'Frameworks',
+    icon: <Zap size={24} />,
+    bgColor: 'from-pink-600 to-pink-500',
+    barColor: 'from-pink-400 to-rose-300',
+    skills: [
+      { name: 'Express JS', percentage: 85, link: 'https://expressjs.com' },
+      { name: 'Next JS', percentage: 85, link: 'https://nextjs.org' },
+      { name: 'Django', percentage: 85, link: 'https://www.djangoproject.com' },
+      { name: 'Laravel', percentage: 80, link: 'https://laravel.com' },
+    ],
   },
   {
     title: 'Backend',
-    icon: <Zap size={24} />,
-    description: 'APIs robustes et scalables',
-    skills: ['Node.js', 'Express', 'Python', 'Django', 'FastAPI', 'NestJS'],
-  },
-  {
-    title: 'Mobile',
-    icon: <Smartphone size={24} />,
-    description: 'Apps iOS et Android natives/cross-platform',
-    skills: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Dart', 'Expo'],
-  },
-  {
-    title: 'Base de Données',
     icon: <Database size={24} />,
-    description: 'Gestion de données complexe',
-    skills: ['PostgreSQL', 'MongoDB', 'Firebase', 'Redis', 'Elasticsearch', 'GraphQL'],
+    bgColor: 'from-purple-600 to-purple-500',
+    barColor: 'from-purple-400 to-pink-300',
+    skills: [
+      { name: 'Node JS', percentage: 85, link: 'https://nodejs.org' },
+      { name: 'Python', percentage: 85, link: 'https://www.python.org' },
+      { name: 'PHP', percentage: 80, link: 'https://www.php.net' },
+    ],
   },
   {
-    title: 'Cloud & DevOps',
+    title: 'Bases de données',
+    icon: <Database size={24} />,
+    bgColor: 'from-green-600 to-green-500',
+    barColor: 'from-green-400 to-emerald-300',
+    skills: [
+      { name: 'MySQL', percentage: 85, link: 'https://www.mysql.com' },
+      { name: 'PostgreSQL', percentage: 90, link: 'https://www.postgresql.org' },
+      { name: 'SQLite', percentage: 90, link: 'https://www.sqlite.org' },
+      { name: 'MongoDB', percentage: 90, link: 'https://www.mongodb.com' },
+    ],
+  },
+  {
+    title: 'DevOps & Outils',
     icon: <Cloud size={24} />,
-    description: 'Déploiement et infrastructure',
-    skills: ['AWS', 'Google Cloud', 'Docker', 'Kubernetes', 'CI/CD', 'Vercel'],
+    bgColor: 'from-yellow-600 to-yellow-500',
+    barColor: 'from-yellow-400 to-orange-300',
+    skills: [
+      { name: 'Docker', percentage: 90, link: 'https://www.docker.com' },
+      { name: 'GitHub', percentage: 90, link: 'https://github.com' },
+      { name: 'Git CI/CD', percentage: 85, link: 'https://git-scm.com' },
+      { name: 'Kubernetes', percentage: 70, link: 'https://kubernetes.io' },
+    ],
   },
   {
-    title: 'Outils & Méthodes',
+    title: 'Méthodologies',
     icon: <Users size={24} />,
-    description: 'Collaboration et qualité',
-    skills: ['Git', 'Agile/Scrum', 'Testing', 'Figma', 'Jira', 'REST/GraphQL'],
+    bgColor: 'from-red-600 to-red-500',
+    barColor: 'from-red-400 to-pink-300',
+    skills: [
+      { name: 'Agile', percentage: 80, link: 'https://www.agilealliance.org' },
+      { name: 'UML', percentage: 80, link: 'https://www.omg.org/spec/UML' },
+      { name: 'Merise', percentage: 85, link: 'https://en.wikipedia.org/wiki/Merise' },
+    ],
   },
 ];
 
 export function Skills() {
   return (
-    <section id="skills" className="relative min-h-screen lg:ml-64 py-20 px-6 md:px-12">
+    <section id="skills" className="relative min-h-screen py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
 
-      <div className="relative z-10 max-w-6xl">
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
+        <style>{`
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          @keyframes slideBar {
+            from {
+              width: 0;
+            }
+          }
+        `}</style>
+
         {/* Section Header */}
-        <div className="mb-16">
-          <div className="inline-block mb-4">
-            <span className="text-accent text-sm font-semibold tracking-widest">
-              COMPÉTENCES
-            </span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold">
-            <span className="block text-foreground mb-2">Stack Technique</span>
-            <span className="gradient-text">& Expertise</span>
+        <div className="mb-12 sm:mb-16 md:mb-20 text-center" style={{ animation: 'fadeInUp 0.8s ease-out' }}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+            <span className="block text-foreground mb-2">Mes</span>
+            <span className="gradient-text">Compétences</span>
           </h2>
-          <p className="text-muted-foreground text-lg mt-4 max-w-2xl">
-            Une gamme complète de technologies modernes pour construire des solutions
-            performantes, scalables et maintenables.
-          </p>
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {skillCategories.map((category, index) => (
             <div
               key={category.title}
-              className="group p-6 rounded-xl border border-border/50 bg-secondary/20 hover:bg-secondary/40 transition-all duration-300 card-hover"
+              className="p-4 sm:p-6 rounded-lg overflow-hidden"
               style={{
                 animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
+                background: `linear-gradient(135deg, hsl(var(--color-start)) 0%, hsl(var(--color-end)) 100%)`,
               }}
             >
-              <style>{`
-                @keyframes fadeInUp {
-                  from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                  }
-                  to {
-                    opacity: 1;
-                    transform: translateY(0);
-                  }
-                }
-              `}</style>
-
-              {/* Icon */}
-              <div className="mb-4 p-3 w-fit rounded-lg bg-accent/10 text-accent group-hover:bg-accent/20 transition-colors">
-                {category.icon}
+              {/* Dynamic gradient header */}
+              <div className={`bg-gradient-to-r ${category.bgColor} p-3 sm:p-4 rounded-lg mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3`}>
+                <div className="text-white text-sm sm:text-base">{category.icon}</div>
+                <h3 className="text-white font-bold text-base sm:text-lg">{category.title}</h3>
               </div>
 
-              {/* Title */}
-              <h3 className="text-xl font-bold text-foreground mb-1">{category.title}</h3>
-              <p className="text-sm text-muted-foreground mb-6">{category.description}</p>
-
-              {/* Skills */}
-              <div className="flex flex-wrap gap-2">
+              {/* Skills List */}
+              <div className="space-y-3 sm:space-y-4">
                 {category.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="text-xs px-3 py-1 rounded-full bg-accent/10 text-accent border border-accent/30 group-hover:border-accent/60 transition-all"
+                  <a
+                    key={skill.name}
+                    href={skill.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block hover:opacity-80 transition-opacity"
                   >
-                    {skill}
-                  </span>
+                    {/* Skill Name & Percentage */}
+                    <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+                      <span className="text-white font-semibold text-xs sm:text-sm">{skill.name}</span>
+                      <span className="text-white text-xs sm:text-sm font-bold">{skill.percentage}%</span>
+                    </div>
+
+                    {/* Progress Bar */}
+                    <div className="w-full bg-white/20 rounded-full h-1.5 sm:h-2 overflow-hidden">
+                      <div
+                        className={`h-full bg-gradient-to-r ${category.barColor} rounded-full transition-all duration-500`}
+                        style={{
+                          width: `${skill.percentage}%`,
+                          animation: `slideBar 0.8s ease-out`,
+                        }}
+                      />
+                    </div>
+                  </a>
                 ))}
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Experience Timeline */}
-        <div className="mt-20 pt-20 border-t border-border">
-          <h3 className="text-2xl md:text-3xl font-bold mb-12">
-            <span className="gradient-text">Parcours Professionnel</span>
-          </h3>
-
-          <div className="space-y-8">
-            {[
-              {
-                year: '2024 - Présent',
-                title: 'Lead Developer',
-                company: 'Tech Startup',
-                description:
-                  'Direction technique, architecture Full Stack et mentoring de 5 développeurs.',
-              },
-              {
-                year: '2021 - 2024',
-                title: 'Senior Full Stack Developer',
-                company: 'Digital Agency',
-                description:
-                  'Développement de solutions SaaS, applications mobile et optimisation de performance.',
-              },
-              {
-                year: '2018 - 2021',
-                title: 'Full Stack Developer',
-                company: 'E-commerce Platform',
-                description: 'Construction de backend scalable et interfaces frontend réactives.',
-              },
-              {
-                year: '2016 - 2018',
-                title: 'Junior Developer',
-                company: 'First Company',
-                description: 'Débuts en développement web avec React et Node.js.',
-              },
-            ].map((exp, index) => (
-              <div
-                key={index}
-                className="flex gap-6 pb-8 border-b border-border/30 last:border-b-0"
-                style={{
-                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
-                }}
-              >
-                <div className="flex flex-col items-center">
-                  <div className="w-4 h-4 rounded-full bg-accent ring-4 ring-background" />
-                  {index < 3 && <div className="w-0.5 h-16 bg-accent/30 mt-4" />}
-                </div>
-                <div className="pt-1">
-                  <p className="text-sm font-semibold text-accent">{exp.year}</p>
-                  <h4 className="text-lg font-bold text-foreground mt-1">{exp.title}</h4>
-                  <p className="text-muted-foreground mb-2">{exp.company}</p>
-                  <p className="text-sm text-muted-foreground">{exp.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

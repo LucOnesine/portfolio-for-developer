@@ -1,6 +1,6 @@
 'use client';
 
-import { Mail, MapPin, Smartphone, Send } from 'lucide-react';
+import { Mail, MapPin, Smartphone, Send, CheckCircle2 } from 'lucide-react';
 import { FormEvent, useState } from 'react';
 
 export function Contact() {
@@ -21,13 +21,13 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative min-h-screen lg:ml-64 py-20 px-6 md:px-12">
+    <section id="contact" className="relative min-h-screen py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
 
-      <div className="relative z-10 max-w-6xl">
+      <div className="relative z-10 max-w-6xl mx-auto w-full">
         {/* Section Header */}
-        <div className="mb-16">
+        <div className="mb-12 sm:mb-16 md:mb-20">
           <div className="inline-block mb-4">
             <span className="text-accent text-sm font-semibold tracking-widest">
               CONTACT
@@ -214,6 +214,19 @@ export function Contact() {
                   ✓ Message envoyé avec succès! Je vous recontacterai bientôt.
                 </div>
               )}
+
+              {/* Why Choose Me */}
+              <div className="mt-8 p-6 rounded-xl border border-border/50 bg-secondary/20">
+                <h3 className="text-lg font-bold text-foreground mb-6">Pourquoi me choisir ?</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {['Réponse rapide sous 24h', 'Devis gratuit et détaillé', 'Suivi personnalisé du projet', 'Support post-livraison'].map((reason) => (
+                    <div key={reason} className="flex items-center gap-3">
+                      <CheckCircle2 size={20} className="text-accent flex-shrink-0" />
+                      <span className="text-muted-foreground text-sm">{reason}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </form>
           </div>
         </div>
