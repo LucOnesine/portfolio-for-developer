@@ -1,50 +1,104 @@
 'use client';
 
-import { Code2, Database, Smartphone, Zap, Cloud, Users } from 'lucide-react';
+import { Code2, Database, Smartphone, Zap, Cloud, Users, ExternalLink } from 'lucide-react';
+
+interface Skill {
+  name: string;
+  link: string;
+}
 
 interface SkillCategory {
   title: string;
   icon: React.ReactNode;
-  skills: string[];
+  skills: Skill[];
   description: string;
+  color: string;
 }
 
 const skillCategories: SkillCategory[] = [
   {
     title: 'Frontend',
     icon: <Code2 size={24} />,
+    color: 'from-blue-500 to-cyan-400',
     description: 'Interfaces web modernes et responsives',
-    skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Vue.js', 'Three.js'],
+    skills: [
+      { name: 'React', link: 'https://react.dev' },
+      { name: 'Next.js', link: 'https://nextjs.org' },
+      { name: 'TypeScript', link: 'https://www.typescriptlang.org' },
+      { name: 'Tailwind CSS', link: 'https://tailwindcss.com' },
+      { name: 'Vue.js', link: 'https://vuejs.org' },
+      { name: 'Three.js', link: 'https://threejs.org' },
+    ],
   },
   {
     title: 'Backend',
     icon: <Zap size={24} />,
+    color: 'from-purple-500 to-pink-400',
     description: 'APIs robustes et scalables',
-    skills: ['Node.js', 'Express', 'Python', 'Django', 'FastAPI', 'NestJS'],
+    skills: [
+      { name: 'Node.js', link: 'https://nodejs.org' },
+      { name: 'Express', link: 'https://expressjs.com' },
+      { name: 'Python', link: 'https://www.python.org' },
+      { name: 'Django', link: 'https://www.djangoproject.com' },
+      { name: 'FastAPI', link: 'https://fastapi.tiangolo.com' },
+      { name: 'NestJS', link: 'https://nestjs.com' },
+    ],
   },
   {
     title: 'Mobile',
     icon: <Smartphone size={24} />,
+    color: 'from-green-500 to-emerald-400',
     description: 'Apps iOS et Android natives/cross-platform',
-    skills: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Dart', 'Expo'],
+    skills: [
+      { name: 'React Native', link: 'https://reactnative.dev' },
+      { name: 'Flutter', link: 'https://flutter.dev' },
+      { name: 'Swift', link: 'https://www.swift.org' },
+      { name: 'Kotlin', link: 'https://kotlinlang.org' },
+      { name: 'Dart', link: 'https://dart.dev' },
+      { name: 'Expo', link: 'https://expo.dev' },
+    ],
   },
   {
     title: 'Base de Données',
     icon: <Database size={24} />,
+    color: 'from-green-500 to-teal-400',
     description: 'Gestion de données complexe',
-    skills: ['PostgreSQL', 'MongoDB', 'Firebase', 'Redis', 'Elasticsearch', 'GraphQL'],
+    skills: [
+      { name: 'PostgreSQL', link: 'https://www.postgresql.org' },
+      { name: 'MongoDB', link: 'https://www.mongodb.com' },
+      { name: 'Firebase', link: 'https://firebase.google.com' },
+      { name: 'Redis', link: 'https://redis.io' },
+      { name: 'Elasticsearch', link: 'https://www.elastic.co' },
+      { name: 'GraphQL', link: 'https://graphql.org' },
+    ],
   },
   {
     title: 'Cloud & DevOps',
     icon: <Cloud size={24} />,
+    color: 'from-orange-500 to-yellow-400',
     description: 'Déploiement et infrastructure',
-    skills: ['AWS', 'Google Cloud', 'Docker', 'Kubernetes', 'CI/CD', 'Vercel'],
+    skills: [
+      { name: 'AWS', link: 'https://aws.amazon.com' },
+      { name: 'Google Cloud', link: 'https://cloud.google.com' },
+      { name: 'Docker', link: 'https://www.docker.com' },
+      { name: 'Kubernetes', link: 'https://kubernetes.io' },
+      { name: 'GitHub Actions', link: 'https://github.com/features/actions' },
+      { name: 'Vercel', link: 'https://vercel.com' },
+    ],
   },
   {
     title: 'Outils & Méthodes',
     icon: <Users size={24} />,
+    color: 'from-red-500 to-pink-400',
     description: 'Collaboration et qualité',
-    skills: ['Git', 'Agile/Scrum', 'Testing', 'Figma', 'Jira', 'REST/GraphQL'],
+    skills: [
+      { name: 'Git', link: 'https://git-scm.com' },
+      { name: 'GitHub', link: 'https://github.com' },
+      { name: 'Testing', link: 'https://vitest.dev' },
+      { name: 'Figma', link: 'https://www.figma.com' },
+      { name: 'Jira', link: 'https://www.atlassian.com/software/jira' },
+      { name: 'REST APIs', link: 'https://restfulapi.net' },
+    ],
   },
 ];
 
@@ -55,20 +109,28 @@ export function Skills() {
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl">
+        <style>{`
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}</style>
+
         {/* Section Header */}
-        <div className="mb-16">
-          <div className="inline-block mb-4">
-            <span className="text-accent text-sm font-semibold tracking-widest">
-              COMPÉTENCES
-            </span>
-          </div>
+        <div className="mb-16 text-center" style={{ animation: 'fadeInUp 0.8s ease-out' }}>
           <h2 className="text-4xl md:text-5xl font-bold">
-            <span className="block text-foreground mb-2">Stack Technique</span>
-            <span className="gradient-text">& Expertise</span>
+            <span className="block text-foreground mb-2">Mes</span>
+            <span className="gradient-text">Compétences</span>
           </h2>
-          <p className="text-muted-foreground text-lg mt-4 max-w-2xl">
-            Une gamme complète de technologies modernes pour construire des solutions
-            performantes, scalables et maintenables.
+          <p className="text-muted-foreground text-lg mt-6 max-w-2xl mx-auto">
+            Une gamme complète de technologies modernes pour construire des solutions performantes,
+            scalables et maintenables.
           </p>
         </div>
 
@@ -77,42 +139,40 @@ export function Skills() {
           {skillCategories.map((category, index) => (
             <div
               key={category.title}
-              className="group p-6 rounded-xl border border-border/50 bg-secondary/20 hover:bg-secondary/40 transition-all duration-300 card-hover"
+              className="group p-6 rounded-xl border border-border/50 bg-secondary/20 hover:bg-secondary/40 transition-all duration-300 overflow-hidden"
               style={{
                 animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
               }}
             >
-              <style>{`
-                @keyframes fadeInUp {
-                  from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                  }
-                  to {
-                    opacity: 1;
-                    transform: translateY(0);
-                  }
-                }
-              `}</style>
+              {/* Gradient Top Bar */}
+              <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${category.color}`} />
 
               {/* Icon */}
-              <div className="mb-4 p-3 w-fit rounded-lg bg-accent/10 text-accent group-hover:bg-accent/20 transition-colors">
+              <div
+                className={`mb-4 p-3 w-fit rounded-lg bg-gradient-to-br ${category.color} text-white`}
+              >
                 {category.icon}
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-bold text-foreground mb-1">{category.title}</h3>
+              <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-accent transition-colors">
+                {category.title}
+              </h3>
               <p className="text-sm text-muted-foreground mb-6">{category.description}</p>
 
               {/* Skills */}
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="text-xs px-3 py-1 rounded-full bg-accent/10 text-accent border border-accent/30 group-hover:border-accent/60 transition-all"
+                  <a
+                    key={skill.name}
+                    href={skill.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs px-3 py-1.5 rounded-full bg-accent/10 text-accent border border-accent/30 hover:border-accent/80 hover:bg-accent/20 transition-all inline-flex items-center gap-1 group/skill"
                   >
-                    {skill}
-                  </span>
+                    {skill.name}
+                    <ExternalLink size={10} className="opacity-0 group-hover/skill:opacity-100 transition-opacity" />
+                  </a>
                 ))}
               </div>
             </div>
