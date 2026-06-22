@@ -18,7 +18,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative lg:ml-64 bg-background border-t border-border">
+    <footer className="relative bg-background border-t border-border">
       <div className="max-w-6xl mx-auto px-6 md:px-12 py-20">
         <style>{`
           @keyframes fadeInUp {

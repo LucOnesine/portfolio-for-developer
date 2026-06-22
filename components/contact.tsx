@@ -21,7 +21,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative min-h-screen lg:ml-64 py-20 px-6 md:px-12">
+    <section id="contact" className="relative min-h-screen py-20 px-6 md:px-12">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
 

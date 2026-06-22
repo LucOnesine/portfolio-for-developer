@@ -1,6 +1,5 @@
-import { Sidebar } from '@/components/sidebar';
+import { Navbar } from '@/components/navbar';
 import { Hero } from '@/components/hero';
-import { About } from '@/components/about';
 import { Approach } from '@/components/approach';
 import { Services } from '@/components/services';
 import { Projects } from '@/components/projects';
@@ -11,10 +10,9 @@ import { Footer } from '@/components/footer';
 export default function Page() {
   return (
     <>
-      <Sidebar />
+      <Navbar />
       <main className="relative">
         <Hero />
-        <About />
         <Approach />
         <Services />
         <Projects />
