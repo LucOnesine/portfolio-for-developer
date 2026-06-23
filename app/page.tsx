@@ -6,7 +6,6 @@ import { Services } from '@/components/services';
 import { Projects } from '@/components/projects';
 import { Skills } from '@/components/skills';
 import { Contact } from '@/components/contact';
-import { Footer } from '@/components/footer';
 
 export default function Page() {
   return (
@@ -17,10 +16,9 @@ export default function Page() {
         <About />
         <Approach />
         <Services />
-        <Projects />
         <Skills />
+        <Projects />
         <Contact />
-        <Footer />
       </main>
     </>
   );

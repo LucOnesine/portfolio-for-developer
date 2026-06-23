@@ -13,8 +13,8 @@ const navItems: NavItem[] = [
   { label: 'Accueil', href: '#home' },
   { label: 'À propos', href: '#about' },
   { label: 'Services', href: '#services' },
-  { label: 'Projets', href: '#projects' },
   { label: 'Compétences', href: '#skills' },
+  { label: 'Projets', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ];
 

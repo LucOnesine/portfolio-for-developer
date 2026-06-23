@@ -1,6 +1,7 @@
 'use client';
 
 import { Code2, Database, Smartphone, Zap, Cloud, Users } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 interface SkillItem {
   name: string;
@@ -40,6 +41,7 @@ const skillCategories: SkillCategory[] = [
       { name: 'Next JS', percentage: 85, link: 'https://nextjs.org' },
       { name: 'Django', percentage: 85, link: 'https://www.djangoproject.com' },
       { name: 'Laravel', percentage: 80, link: 'https://laravel.com' },
+      { name: 'Angular JS', percentage: 75, link: 'https://Angularjs.com' },
     ],
   },
   {
@@ -49,7 +51,8 @@ const skillCategories: SkillCategory[] = [
     barColor: 'from-purple-400 to-pink-300',
     skills: [
       { name: 'Node JS', percentage: 85, link: 'https://nodejs.org' },
-      { name: 'Python', percentage: 85, link: 'https://www.python.org' },
+      { name: 'Python', percentage: 80, link: 'https://www.python.org' },
+      { name: 'Java', percentage: 90, link: 'https://www.Java.org' },
       { name: 'PHP', percentage: 80, link: 'https://www.php.net' },
     ],
   },
@@ -59,10 +62,9 @@ const skillCategories: SkillCategory[] = [
     bgColor: 'from-green-600 to-green-500',
     barColor: 'from-green-400 to-emerald-300',
     skills: [
-      { name: 'MySQL', percentage: 85, link: 'https://www.mysql.com' },
+      { name: 'MySQL', percentage: 90, link: 'https://www.mysql.com' },
       { name: 'PostgreSQL', percentage: 90, link: 'https://www.postgresql.org' },
-      { name: 'SQLite', percentage: 90, link: 'https://www.sqlite.org' },
-      { name: 'MongoDB', percentage: 90, link: 'https://www.mongodb.com' },
+      { name: 'SQLite', percentage: 80, link: 'https://www.sqlite.org' },
     ],
   },
   {
@@ -71,10 +73,9 @@ const skillCategories: SkillCategory[] = [
     bgColor: 'from-yellow-600 to-yellow-500',
     barColor: 'from-yellow-400 to-orange-300',
     skills: [
-      { name: 'Docker', percentage: 90, link: 'https://www.docker.com' },
+      { name: 'Docker', percentage: 80, link: 'https://www.docker.com' },
       { name: 'GitHub', percentage: 90, link: 'https://github.com' },
       { name: 'Git CI/CD', percentage: 85, link: 'https://git-scm.com' },
-      { name: 'Kubernetes', percentage: 70, link: 'https://kubernetes.io' },
     ],
   },
   {
@@ -85,16 +86,85 @@ const skillCategories: SkillCategory[] = [
     skills: [
       { name: 'Agile', percentage: 80, link: 'https://www.agilealliance.org' },
       { name: 'UML', percentage: 80, link: 'https://www.omg.org/spec/UML' },
-      { name: 'Merise', percentage: 85, link: 'https://en.wikipedia.org/wiki/Merise' },
+      { name: 'Merise', percentage: 95, link: 'https://en.wikipedia.org/wiki/Merise' },
     ],
   },
 ];
 
 export function Skills() {
+
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    const particles: Array<{
+      x: number;
+      y: number;
+      size: number;
+      speedX: number;
+      speedY: number;
+      opacity: number;
+    }> = [];
+
+    for (let i = 0; i < 200; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2,
+        speedX: (Math.random() - 0.5) * 0.5,
+        speedY: (Math.random() - 0.5) * 0.5,
+        opacity: Math.random() * 0.5 + 100,
+      });
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00d4ff';
+
+      particles.forEach((p) => {
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        ctx.globalAlpha = p.opacity;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+  }, []);
+  
   return (
     <section id="skills" className="relative min-h-screen py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
+
+      {/* Animated Background */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full opacity-30"
+      />
+
+      {/* Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/10" />
+
 
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <style>{`
@@ -116,9 +186,9 @@ export function Skills() {
         `}</style>
 
         {/* Section Header */}
-        <div className="mb-12 sm:mb-16 md:mb-20 text-center" style={{ animation: 'fadeInUp 0.8s ease-out' }}>
+        <div className="mb-12 sm:mb-16 md:mb-20 text-center" style={{ animation: 'fadeInUp 8s ease-out' }}>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            <span className="block text-foreground mb-2">Mes</span>
+            <span className=" text-foreground mb-2">Mes </span>
             <span className="gradient-text">Compétences</span>
           </h2>
         </div>
@@ -130,7 +200,7 @@ export function Skills() {
               key={category.title}
               className="p-4 sm:p-6 rounded-lg overflow-hidden"
               style={{
-                animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
+                animation: `fadeInUp 6s ease-out ${index * 0.1}s both`,
                 background: `linear-gradient(135deg, hsl(var(--color-start)) 0%, hsl(var(--color-end)) 100%)`,
               }}
             >
@@ -162,7 +232,7 @@ export function Skills() {
                         className={`h-full bg-gradient-to-r ${category.barColor} rounded-full transition-all duration-500`}
                         style={{
                           width: `${skill.percentage}%`,
-                          animation: `slideBar 0.8s ease-out`,
+                          animation: `slideBar 5s ease-out`,
                         }}
                       />
                     </div>

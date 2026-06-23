@@ -2,6 +2,7 @@
 
 import { Mail, MapPin, Smartphone, Send, CheckCircle2 } from 'lucide-react';
 import { FormEvent, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -19,11 +20,90 @@ export function Contact() {
       (e.target as HTMLFormElement).reset();
     }, 1000);
   };
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  
+    useEffect(() => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+  
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+  
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+  
+      const particles: Array<{
+        x: number;
+        y: number;
+        size: number;
+        speedX: number;
+        speedY: number;
+        opacity: number;
+      }> = [];
+  
+      for (let i = 0; i < 200; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2,
+          speedX: (Math.random() - 0.5) * 0.5,
+          speedY: (Math.random() - 0.5) * 0.5,
+          opacity: Math.random() * 0.5 + 100,
+        });
+      }
+  
+      const animate = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#00d4ff';
+  
+        particles.forEach((p) => {
+          p.x += p.speedX;
+          p.y += p.speedY;
+  
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
+  
+          ctx.globalAlpha = p.opacity;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        });
+  
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(animate);
+      };
+  
+      animate();
+    }, []);
+
+    const navigation = [
+    { name: 'Accueil', href: '#home' },
+    { name: 'À propos', href: '#about' },
+    { name: 'Services', href: '#services' },
+    { name: 'Projets', href: '#projects' },
+    { name: 'Compétences', href: '#skills' },
+    { name: 'Contact', href: '#contact' },
+  ];
+
+  const services = [
+    'Développement Mobile',
+    'Applications Web',
+    'Sites WordPress',
+    'Apprentissage & Formation',
+  ];
 
   return (
     <section id="contact" className="relative min-h-screen py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
+
+      {/* Animated Background */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full opacity-30"
+      />
 
       <div className="relative z-10 max-w-6xl mx-auto w-full">
         {/* Section Header */}
@@ -34,7 +114,7 @@ export function Contact() {
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold">
-            <span className="block text-foreground mb-2">Prêt à</span>
+            <span className=" text-foreground mb-2">Prêt à </span>
             <span className="gradient-text">collaborer?</span>
           </h2>
           <p className="text-muted-foreground text-lg mt-4 max-w-2xl">
@@ -71,10 +151,10 @@ export function Contact() {
                 </div>
                 <h3 className="font-semibold text-foreground mb-1">Email</h3>
                 <a
-                  href="mailto:hello@devportfolio.com"
+                  href="fitahiantsoaluconesine@gmail.com"
                   className="text-muted-foreground hover:text-accent transition-colors"
                 >
-                  hello@devportfolio.com
+                  fitahiantsoaluconesine@gmail.com
                 </a>
               </div>
 
@@ -90,10 +170,10 @@ export function Contact() {
                 </div>
                 <h3 className="font-semibold text-foreground mb-1">Téléphone</h3>
                 <a
-                  href="tel:+33123456789"
+                  href="tel:+261344232108"
                   className="text-muted-foreground hover:text-accent transition-colors"
                 >
-                  +33 1 23 45 67 89
+                  +261 34 42 321 08
                 </a>
               </div>
 
@@ -108,7 +188,7 @@ export function Contact() {
                   <MapPin className="text-accent" size={24} />
                 </div>
                 <h3 className="font-semibold text-foreground mb-1">Localisation</h3>
-                <p className="text-muted-foreground">Paris, France</p>
+                <p className="text-muted-foreground">Antananarivo, Madagascar</p>
               </div>
 
               {/* Response Time */}
@@ -234,7 +314,7 @@ export function Contact() {
         {/* Footer */}
         <div className="mt-20 pt-12 border-t border-border text-center">
           <p className="text-muted-foreground mb-4">
-            © 2024 Dev Portfolio. Tous droits réservés.
+            © 2026 Dev Portfolio. Tous droits réservés.
           </p>
           <div className="flex justify-center gap-4">
             <a href="#" className="text-muted-foreground hover:text-accent transition-colors">

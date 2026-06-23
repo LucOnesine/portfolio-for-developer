@@ -2,14 +2,82 @@
 
 import { Download, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
+import { ArrowRight, Code2, Smartphone } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 export function Hero() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    const particles: Array<{
+      x: number;
+      y: number;
+      size: number;
+      speedX: number;
+      speedY: number;
+      opacity: number;
+    }> = [];
+
+    for (let i = 0; i < 200; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2,
+        speedX: (Math.random() - 0.5) * 0.5,
+        speedY: (Math.random() - 0.5) * 0.5,
+        opacity: Math.random() * 0.5 + 100,
+      });
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00d4ff';
+
+      particles.forEach((p) => {
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        ctx.globalAlpha = p.opacity;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+  }, []);
   return (
     <section id="home" className="relative min-h-screen pt-32 pb-20">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      {/* Animated Background */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full opacity-30"
+      />
+
+      {/* Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/10" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-0">
         <style>{`
           @keyframes fadeInUp {
             from {
@@ -39,15 +107,17 @@ export function Hero() {
             <p className="text-accent text-sm font-semibold mb-4">Bienvenue, Je suis</p>
 
             <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Armel<br />Rantomahampy
+              Luc Onesine<br />FITAHIANTSOA
             </h1>
 
             <p className="text-2xl font-semibold text-muted-foreground mb-6">
-              Développeur React Native & Next.js
+              Full Stack Web & Mobile
             </p>
 
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-md">
-              Développeur passionné spécialisé en React Native (Expo) et Next.js. Fort de plusieurs années d&apos;expérience, je crée des applications web et mobiles modernes, performantes et user-friendly. Mon expertise couvre l&apos;ensemble du développement full-stack, de la conception UI/UX à la mise en production.
+              Je conçois et développe des expériences numériques exceptionnelles. Avec expertise en web
+            moderne, applications mobiles et solutions backend, je transforme vos idées en produits
+            scalables et performants.
             </p>
 
             {/* Buttons */}
