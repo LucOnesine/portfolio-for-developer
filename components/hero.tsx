@@ -1,6 +1,6 @@
 'use client';
 
-import { Download, MessageCircle } from 'lucide-react';
+import { Download, MessageCircle, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 
 export function Hero() {
@@ -29,6 +29,14 @@ export function Hero() {
             to {
               opacity: 1;
               transform: translateX(0);
+            }
+          }
+          @keyframes bounce {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-12px);
             }
           }
         `}</style>
@@ -90,6 +98,18 @@ export function Hero() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Scroll Down Arrow */}
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
+          <p className="text-sm text-muted-foreground">Scroller pour découvrir</p>
+          <a
+            href="#about"
+            className="text-accent hover:text-cyan-400 transition-colors"
+            style={{ animation: 'bounce 2s infinite' }}
+          >
+            <ChevronDown size={32} strokeWidth={1.5} />
+          </a>
         </div>
       </div>
     </section>

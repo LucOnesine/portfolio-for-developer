@@ -1,6 +1,7 @@
 'use client';
 
 import { Code2, Database, Smartphone, Zap, Cloud, Users } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 interface SkillItem {
   name: string;
@@ -90,6 +91,74 @@ const skillCategories: SkillCategory[] = [
   },
 ];
 
+interface SkillBarProps {
+  skill: SkillItem;
+  barColor: string;
+}
+
+function SkillBar({ skill, barColor }: SkillBarProps) {
+  const [displayPercentage, setDisplayPercentage] = useState(0);
+  const [width, setWidth] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          let currentPercentage = 0;
+          const interval = setInterval(() => {
+            if (currentPercentage < skill.percentage) {
+              currentPercentage += Math.ceil(skill.percentage / 30);
+              setDisplayPercentage(Math.min(currentPercentage, skill.percentage));
+              setWidth(Math.min(currentPercentage, skill.percentage));
+            } else {
+              clearInterval(interval);
+            }
+          }, 30);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (barRef.current) {
+      observer.observe(barRef.current);
+    }
+
+    return () => {
+      if (barRef.current) {
+        observer.unobserve(barRef.current);
+      }
+    };
+  }, [skill.percentage]);
+
+  return (
+    <a
+      ref={barRef}
+      key={skill.name}
+      href={skill.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block hover:opacity-80 transition-opacity"
+    >
+      {/* Skill Name & Percentage */}
+      <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+        <span className="text-white font-semibold text-xs sm:text-sm">{skill.name}</span>
+        <span className="text-white text-xs sm:text-sm font-bold">{displayPercentage}%</span>
+      </div>
+
+      {/* Progress Bar */}
+      <div className="w-full bg-white/20 rounded-full h-1.5 sm:h-2 overflow-hidden">
+        <div
+          className={`h-full bg-gradient-to-r ${barColor} rounded-full transition-all duration-300`}
+          style={{
+            width: `${width}%`,
+          }}
+        />
+      </div>
+    </a>
+  );
+}
+
 export function Skills() {
   return (
     <section id="skills" className="relative min-h-screen py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8">
@@ -143,30 +212,7 @@ export function Skills() {
               {/* Skills List */}
               <div className="space-y-3 sm:space-y-4">
                 {category.skills.map((skill) => (
-                  <a
-                    key={skill.name}
-                    href={skill.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group block hover:opacity-80 transition-opacity"
-                  >
-                    {/* Skill Name & Percentage */}
-                    <div className="flex items-center justify-between mb-1.5 sm:mb-2">
-                      <span className="text-white font-semibold text-xs sm:text-sm">{skill.name}</span>
-                      <span className="text-white text-xs sm:text-sm font-bold">{skill.percentage}%</span>
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div className="w-full bg-white/20 rounded-full h-1.5 sm:h-2 overflow-hidden">
-                      <div
-                        className={`h-full bg-gradient-to-r ${category.barColor} rounded-full transition-all duration-500`}
-                        style={{
-                          width: `${skill.percentage}%`,
-                          animation: `slideBar 0.8s ease-out`,
-                        }}
-                      />
-                    </div>
-                  </a>
+                  <SkillBar key={skill.name} skill={skill} barColor={category.barColor} />
                 ))}
               </div>
             </div>
