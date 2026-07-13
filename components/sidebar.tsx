@@ -27,14 +27,14 @@ const navItems: NavItem[] = [
     icon: <Home size={20} />,
   },
   {
-    label: 'Projets',
-    href: '#projects',
-    icon: <Code2 size={20} />,
-  },
-  {
     label: 'Compétences',
     href: '#skills',
     icon: <Briefcase size={20} />,
+  },
+  {
+    label: 'Projets',
+    href: '#projects',
+    icon: <Code2 size={20} />,
   },
   {
     label: 'Contact',

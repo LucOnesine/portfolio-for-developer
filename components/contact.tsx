@@ -1,25 +1,46 @@
 'use client';
 
-import { Mail, MapPin, Smartphone, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, MapPin, Smartphone, Send, CheckCircle2  } from 'lucide-react';
+import emailjs from "@emailjs/browser";
+import { FaGithub } from "react-icons/fa";
 import { FormEvent, useState } from 'react';
 import { useEffect, useRef } from 'react';
+
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const form = useRef<HTMLFormElement>(null);
 
-    // Simulate form submission
-    setTimeout(() => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  setIsSubmitting(true);
+
+  emailjs
+    .sendForm(
+      "service_0dd9lb6",
+      "template_m8m3xru",
+      form.current!,
+      "6omZyftCIwB3c2bqa"
+    )
+    .then(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 3000);
-      (e.target as HTMLFormElement).reset();
-    }, 1000);
-  };
+
+      form.current?.reset();
+
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 3000);
+    })
+    .catch((error) => {
+      setIsSubmitting(false);
+      console.log(error);
+      alert("Erreur lors de l'envoi.");
+    });
+};
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
     useEffect(() => {
@@ -126,10 +147,21 @@ export function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Info */}
           <div className="lg:col-span-1">
-            <div className="space-y-8">
+            <div
+            className="lg:col-span-2 p-8 rounded-xl border border-border/50 bg-secondary/20 backdrop-blur-sm"
+            style={{
+              animation: `fadeInUp 0.6s ease-out 0.4s both`,
+            }}
+          >
+
+          <div className="relative z-80">
+
+              <h5 className="text-4xl font-bold mb-8">
+                  Informations
+              </h5>
               {/* Email */}
               <div
-                className="group"
+                className="flex items-start gap-4"
                 style={{
                   animation: `fadeInUp 0.6s ease-out 0s both`,
                 }}
@@ -146,49 +178,78 @@ export function Contact() {
                     }
                   }
                 `}</style>
-                <div className="p-4 rounded-lg bg-secondary/30 border border-border/50 group-hover:border-accent/50 transition-all inline-block mb-3">
+                <div className="p-4 rounded-lg bg-secondary/30 border border-border/50 group-hover:border-accent/50 transition-all inline-block mb-10">
                   <Mail className="text-accent" size={24} />
                 </div>
-                <h3 className="font-semibold text-foreground mb-1">Email</h3>
-                <a
-                  href="fitahiantsoaluconesine@gmail.com"
-                  className="text-muted-foreground hover:text-accent transition-colors"
-                >
-                  fitahiantsoaluconesine@gmail.com
-                </a>
+                <div>
+                  <h3 className="font-semibold text-foreground mb-1">Email</h3>
+                  <a
+                    href="mailto:fitahiantsoaluconesine@gmail.com"
+                    className="text-muted-foreground hover:text-accent transition-colors"
+                  >
+                    fitahiantsoaluconesine@gmail.com
+                  </a>
+                </div>
               </div>
 
               {/* Phone */}
               <div
-                className="group"
+                className="flex items-start gap-4"
                 style={{
                   animation: `fadeInUp 0.6s ease-out 0.1s both`,
                 }}
               >
-                <div className="p-4 rounded-lg bg-secondary/30 border border-border/50 group-hover:border-accent/50 transition-all inline-block mb-3">
+                <div className="p-4 rounded-lg bg-secondary/30 border border-border/50 group-hover:border-accent/50 transition-all inline-block mb-10">
                   <Smartphone className="text-accent" size={24} />
                 </div>
-                <h3 className="font-semibold text-foreground mb-1">Téléphone</h3>
-                <a
-                  href="tel:+261344232108"
-                  className="text-muted-foreground hover:text-accent transition-colors"
-                >
-                  +261 34 42 321 08
-                </a>
+                <div>
+                  <h3 className="font-semibold text-foreground mb-1">Téléphone</h3>
+                  <a
+                    href="tel:+261344232108"
+                    className="text-muted-foreground hover:text-accent transition-colors"
+                  >
+                    +261 34 42 321 08
+                  </a>
+                </div>
               </div>
 
-              {/* Location */}
+              {/* GitHub */}
               <div
-                className="group"
+                className="flex items-start gap-4"
                 style={{
                   animation: `fadeInUp 0.6s ease-out 0.2s both`,
                 }}
               >
-                <div className="p-4 rounded-lg bg-secondary/30 border border-border/50 group-hover:border-accent/50 transition-all inline-block mb-3">
+                <div className="p-4 rounded-lg bg-secondary/30 border border-border/50 group-hover:border-accent/50 transition-all inline-block mb-10">
+                  <FaGithub  className="text-accent" size={24} />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground mb-1">GitHub</h3>
+                  <a
+                    href="https://github.com/LucOnesine"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-accent transition-colors"
+                  >
+                    LucOnesine
+                  </a>
+                </div>
+              </div>
+
+              {/* Location */}
+              <div
+                className="flex items-start gap-4"
+                style={{
+                  animation: `fadeInUp 0.6s ease-out 0.2s both`,
+                }}
+              >
+                <div className="p-4 rounded-lg bg-secondary/30 border border-border/50 group-hover:border-accent/50 transition-all inline-block mb-10">
                   <MapPin className="text-accent" size={24} />
                 </div>
-                <h3 className="font-semibold text-foreground mb-1">Localisation</h3>
-                <p className="text-muted-foreground">Antananarivo, Madagascar</p>
+                <div>
+                  <h3 className="font-semibold text-foreground mb-1">Localisation</h3>
+                  <p className="text-muted-foreground">Antananarivo, Madagascar</p>
+                </div>
               </div>
 
               {/* Response Time */}
@@ -205,7 +266,7 @@ export function Contact() {
                     Généralement dans les 24 heures
                   </span>
                 </p>
-              </div>
+              </div></div>
             </div>
           </div>
 
@@ -216,7 +277,7 @@ export function Contact() {
               animation: `fadeInUp 0.6s ease-out 0.4s both`,
             }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={form} onSubmit={handleSubmit} className="space-y-6">
               {/* Name & Email Row */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -225,6 +286,7 @@ export function Contact() {
                   </label>
                   <input
                     type="text"
+                    name="name"
                     placeholder="Votre nom"
                     required
                     className="w-full px-4 py-3 rounded-lg bg-background border border-border/50 text-foreground placeholder-muted-foreground focus:border-accent focus:outline-none transition-colors"
@@ -236,6 +298,7 @@ export function Contact() {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     placeholder="votre@email.com"
                     required
                     className="w-full px-4 py-3 rounded-lg bg-background border border-border/50 text-foreground placeholder-muted-foreground focus:border-accent focus:outline-none transition-colors"
@@ -250,6 +313,7 @@ export function Contact() {
                 </label>
                 <input
                   type="text"
+                  name="subject"
                   placeholder="Sujet du message"
                   required
                   className="w-full px-4 py-3 rounded-lg bg-background border border-border/50 text-foreground placeholder-muted-foreground focus:border-accent focus:outline-none transition-colors"
@@ -262,6 +326,7 @@ export function Contact() {
                   Message
                 </label>
                 <textarea
+                  name="message"
                   placeholder="Votre message..."
                   rows={5}
                   required
@@ -317,16 +382,16 @@ export function Contact() {
             © 2026 Dev Portfolio. Tous droits réservés.
           </p>
           <div className="flex justify-center gap-4">
-            <a href="#" className="text-muted-foreground hover:text-accent transition-colors">
+            <a href="https://github.com/LucOnesine" className="text-muted-foreground hover:text-accent transition-colors">
               GitHub
             </a>
             <span className="text-border">•</span>
-            <a href="#" className="text-muted-foreground hover:text-accent transition-colors">
+            <a href="https://www.linkedin.com/in/luc-onesine-fitahiantsoa-a08779306" className="text-muted-foreground hover:text-accent transition-colors">
               LinkedIn
             </a>
             <span className="text-border">•</span>
-            <a href="#" className="text-muted-foreground hover:text-accent transition-colors">
-              Twitter
+            <a href="https://facebook.com/luc.onesime.3" className="text-muted-foreground hover:text-accent transition-colors">
+              Facebook
             </a>
           </div>
         </div>

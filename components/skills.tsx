@@ -41,7 +41,7 @@ const skillCategories: SkillCategory[] = [
       { name: 'Next JS', percentage: 85, link: 'https://nextjs.org' },
       { name: 'Django', percentage: 85, link: 'https://www.djangoproject.com' },
       { name: 'Laravel', percentage: 80, link: 'https://laravel.com' },
-      { name: 'Angular JS', percentage: 75, link: 'https://Angularjs.com' },
+      { name: 'Angular JS', percentage: 75, link: 'https://angularjs.org/' },
     ],
   },
   {

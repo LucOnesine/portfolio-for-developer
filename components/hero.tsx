@@ -1,9 +1,10 @@
 'use client';
 
-import { Download, MessageCircle } from 'lucide-react';
+import { ChevronDown, Download, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 import { ArrowRight, Code2, Smartphone } from 'lucide-react';
 import { useEffect, useRef } from 'react';
+import { TypeAnimation } from 'react-type-animation';
 
 export function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -99,6 +100,15 @@ export function Hero() {
               transform: translateX(0);
             }
           }
+
+          @keyframes bounce {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-12px);
+            }
+          }
         `}</style>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -106,19 +116,50 @@ export function Hero() {
           <div style={{ animation: 'fadeInUp 0.8s ease-out' }}>
             <p className="text-accent text-sm font-semibold mb-4">Bienvenue, Je suis</p>
 
-            <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Luc Onesine<br />FITAHIANTSOA
+            <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight min-h-[180px]">
+              <TypeAnimation
+                sequence={[
+                  'FITAHIANTSOA',
+                  1000,
+                  `FITAHIANTSOA Luc Onesine`,
+                  5000,
+                ]}
+                speed={20}
+                repeat={Infinity}
+                cursor={true}
+              />
             </h1>
 
-            <p className="text-2xl font-semibold text-muted-foreground mb-6">
-              Full Stack Web & Mobile
-            </p>
+           <div className="text-2xl md:text-3xl font-semibold text-accent mb-6">
+            <TypeAnimation
+              sequence={[
+                'Développeur Web',
+                1500,
+                'Développeur Mobile',
+                1500,
+                'Développeur Full Stack',
+                1500,
+                'Développeur Web & Mobile',
+                2000,
+              ]}
+              speed={60}
+              repeat={Infinity}
+              cursor={true}
+            />
+          </div>
 
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-md">
-              Je conçois et développe des expériences numériques exceptionnelles. Avec expertise en web
-            moderne, applications mobiles et solutions backend, je transforme vos idées en produits
-            scalables et performants.
-            </p>
+            <div className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-xl">
+              <TypeAnimation
+                sequence={[
+                  `Je conçois et développe des expériences numériques exceptionnelles.
+                  Avec expertise en développement web moderne, applications mobiles
+                  et solutions backend, je transforme vos idées en produits
+                  performants et évolutifs.`,
+                ]}
+                speed={90}
+                cursor={false}
+              />
+            </div>
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
@@ -130,7 +171,7 @@ export function Hero() {
                 Me contacter
               </a>
               <a
-                href="#"
+                href="/FITAHIANTSOALucOnesineCV.pdf"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-all"
               >
                 <Download size={20} />
@@ -151,8 +192,8 @@ export function Hero() {
               {/* White Background with Image */}
               <div className="absolute inset-2 bg-white rounded-3xl overflow-hidden">
                 <Image
-                  src="/profile.png"
-                  alt="Armel Rantomahampy"
+                  src="/fts.jpg"
+                  alt="Luc Onesine FITAHIANTSOA"
                   fill
                   className="object-cover"
                   priority
@@ -160,6 +201,17 @@ export function Hero() {
               </div>
             </div>
           </div>
+        </div>
+        {/* Scroll Down Arrow */}
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
+          <p className="text-sm text-muted-foreground">Scroller pour découvrir</p>
+          <a
+            href="#about"
+            className="text-accent hover:text-cyan-400 transition-colors"
+            style={{ animation: 'bounce 2s infinite' }}
+          >
+            <ChevronDown size={32} strokeWidth={1.5} />
+          </a>
         </div>
       </div>
     </section>

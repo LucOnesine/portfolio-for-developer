@@ -126,7 +126,7 @@ export function About() {
                 Me contacter
               </a>
               <a
-                href="#"
+                href="/cvfts.pdf"
                 className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-all text-sm sm:text-base"
               >
                 <Download size={20} />

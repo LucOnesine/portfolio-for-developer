@@ -19,73 +19,73 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: 'Iz\'aho : Application mobile de numérologie',
+    title: 'K2TH : Application mobile de Code, Technique, Histoir et chant pour les scout',
     description:
-      'Application mobile de numérologie moderne permettant d\'analyser un profil à partir du nom et de la date de naissance.',
-    image: '/project-1.png',
-    tags: ['React Native', 'SQLite'],
-    link: '#',
+      'Application mobile avec kotlin et SQLite qui permet d\'apprendre desimuler les code technique et chant pour les scouts. ',
+    image: '/K2TH.jpg',
+    tags: [' kotlin ', 'SQLite'],
+    link: 'http://localhost:5173/',
     category: 'Mobile',
-    demoLink: '#',
+    demoLink: 'http://localhost:5172/',
   },
   {
     id: 2,
-    title: 'E-laytsena : Application mobile de gestion commerciale',
+    title: 'gestion de vol : Dashboard analytics en temps réel pour la gestion de vol',
     description:
-      'Le projet e-laytsena est une application mobile développée avec React Native et Expo Router, visant à simplifier la gestion...',
-    image: '/project-2.png',
-    tags: ['React Native', 'Expo Router', 'Nativewind'],
-    link: '#',
-    category: 'Mobile',
-    demoLink: '#',
+      'site web pour faire une reservation de billet d\'avion pour le client. Une application pour gerer les vols valider le demande de billet pour une aeroport',
+    image: '/project-4.png',
+    tags: ['C#', 'SQL Server', 'ASP.NET'],
+    link: '#projects',
+    category: 'Web',
+    demoLink: '#projects',
   },
   {
     id: 3,
-    title: 'Kiambale : Site web professionnel d\'un restaurant',
+    title: 'gestion de parking : Site web pour gere un parking',
     description:
-      'Site web élégant et moderne pour le restaurant Kiambale, conçu pour offrir une expérience utilisateur exceptionnelle et...',
-    image: '/project-3.png',
-    tags: ['WordPress', 'PHP', 'MySQL'],
-    link: '#',
-    category: 'WordPress',
-    demoLink: '#',
+      'Site Web pour une reservation de parking et interface pour l\'administrateur pour suivre le demande valider ou rejeter la demande',
+    image: '/parking1.jpeg',
+    tags: ['AngularJS', 'Python', 'PostgresSQL'],
+    link: '#projects',
+    category: 'Web',
+    demoLink: '#projects',
   },
   {
     id: 4,
-    title: 'Plateforme SaaS Analytics',
+    title: 'Gestion de conger : Application web pour la gestion des congés',
     description:
-      'Dashboard analytics en temps réel avec visualisation de données avancée, authentification OAuth et intégrations API.',
-    image: '/project-1.png',
-    tags: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
-    link: '#',
+      'Une application web pour faire une demande de conger et pour l\'administrateur pour valider ou rejeter la demande de conger',
+    image: '/GestionConge.png',
+    tags: ['Next.js', 'TypeScript', 'Python', 'PostgreSQL'],
+    link: '#projects',
     category: 'Web',
     demoLink: '#',
   },
   {
     id: 5,
-    title: 'Application Fitness & Wellness',
+    title: 'site vitrine du Cyndicat ',
     description:
-      'App mobile avec tracking d\'entraînements, coaching IA, social features et intégration wearables.',
-    image: '/project-4.png',
-    tags: ['Flutter', 'Dart', 'Cloud Functions'],
-    link: '#',
-    category: 'Mobile',
-    demoLink: '#',
+      'SIte vitrine pour le syndicat des travailleurs mettant en avant les activités, les actualités et les informations importantes pour les membres et le public.',
+    image: '/syndicat.jpeg',
+    tags: ['React.js', 'Node.js', 'PostgreSQL'],
+    link: '#projects',
+    category: 'Web',
+    demoLink: '#projects',
   },
   {
     id: 6,
     title: 'Portfolio Personnel',
     description:
       'Site portfolio personnel showcasing mes projets et compétences en développement web et mobile.',
-    image: '/portfolio.png',
+    image: '/ftspic.png',
     tags: ['Next.js', 'React', 'Tailwind CSS'],
-    link: '#',
+    link: 'http://localhost:3000/#home',
     category: 'Web',
-    demoLink: '#',
+    demoLink: 'http://localhost:3000/#home',
   },
 ];
 
-const categories = ['Tous', 'Web', 'Mobile', 'WordPress'];
+const categories = ['Tous', 'Web', 'Mobile'];
 
 
 
@@ -233,10 +233,13 @@ export function Projects() {
                   {/* Image Placeholder with Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-blue-500/10 to-transparent flex items-center justify-center">
                     <div className="text-center px-4">
-                      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-accent/30 mb-1 sm:mb-2">
-                        {project.category}
-                      </div>
-                      <p className="text-muted-foreground text-xs line-clamp-1">{project.title}</p>
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
                     </div>
                   </div>
 

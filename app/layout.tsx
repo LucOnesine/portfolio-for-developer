@@ -10,18 +10,18 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Développeur Full Stack | Web & Mobile Developer',
+  title: 'Développeur Web & Mobile ',
   description:
     'Portfolio professionnel d\'un développeur full stack spécialisé en web et mobile. Découvrez mes projets, compétences et expérience.',
   generator: 'v0.app',
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
+        url: '/placeholder-logo.png',
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/icon-dark-32x32.png',
+        url: '/placeholder-logo.png',
         media: '(prefers-color-scheme: dark)',
       },
       {
