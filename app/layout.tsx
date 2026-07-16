@@ -17,19 +17,19 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/placeholder-logo.png',
+        url: '/logoFTSC.png',
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/placeholder-logo.png',
+        url: '/logoFTS.png',
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: '/icon.svg',
+        url: '/logoFTSC.svg',
         type: 'image/svg+xml',
       },
     ],
-    apple: '/apple-icon.png',
+    apple: '/logoFTS.png',
   },
 }
 
@@ -56,3 +56,4 @@ export default function RootLayout({
     </html>
   )
 }
+

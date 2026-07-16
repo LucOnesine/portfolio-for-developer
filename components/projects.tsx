@@ -33,7 +33,7 @@ const projects: Project[] = [
     title: 'gestion de vol : Dashboard analytics en temps réel pour la gestion de vol',
     description:
       'site web pour faire une reservation de billet d\'avion pour le client. Une application pour gerer les vols valider le demande de billet pour une aeroport',
-    image: '/project-4.png',
+    image: '/vol.png',
     tags: ['C#', 'SQL Server', 'ASP.NET'],
     link: '#projects',
     category: 'Web',
