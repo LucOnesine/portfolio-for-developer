@@ -79,9 +79,9 @@ const projects: Project[] = [
       'Site portfolio personnel showcasing mes projets et compétences en développement web et mobile.',
     image: '/ftspic.png',
     tags: ['Next.js', 'React', 'Tailwind CSS'],
-    link: 'http://localhost:3000/#home',
+    link: 'https://portfolioluconesine.vercel.app/#projects',
     category: 'Web',
-    demoLink: 'http://localhost:3000/#home',
+    demoLink: 'https://portfolioluconesine.vercel.app/#projects',
   },
 ];
 

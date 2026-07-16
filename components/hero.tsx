@@ -78,7 +78,7 @@ export function Hero() {
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/10" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-0">
+      <div className="relative z-10 max-w-7xl mx-auto px-8">
         <style>{`
           @keyframes fadeInUp {
             from {
