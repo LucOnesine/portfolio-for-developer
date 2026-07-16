@@ -10,7 +10,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Développeur Web & Mobile ',
+  title: 'FITAHIANTSOA Luc Onesine Portfolio',
   description:
     'Portfolio professionnel d\'un développeur full stack spécialisé en web et mobile. Découvrez mes projets, compétences et expérience.',
   generator: 'v0.app',

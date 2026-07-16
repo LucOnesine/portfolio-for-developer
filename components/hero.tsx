@@ -170,13 +170,6 @@ export function Hero() {
                 <MessageCircle size={20} />
                 Me contacter
               </a>
-              <a
-                href="/FITAHIANTSOALucOnesineCV.pdf"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-all"
-              >
-                <Download size={20} />
-                Télécharger CV
-              </a>
             </div>
           </div>
 

@@ -105,7 +105,7 @@ export function About() {
           {/* Left Content */}
           <div style={{ animation: 'fadeInUp 0.8s ease-out 0.1s both' }}>
             <p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed">
-              Développeur passionné en apprentissage, j&apos;ai découvert ma vocation dans le monde du code il y a quelques années. Actuellement en formation intensive en React Native et Next.js, je développe mes compétences jour après jour pour créer des solutions digitales modernes.
+              Développeur Web & Mobile passionné, je conçois des applications modernes, performantes et intuitives. Curieux et en constante évolution, j'améliore continuellement mes compétences en React, Next.js, React Native et les technologies du développement afin de créer des solutions innovantes offrant une excellente expérience utilisateur.
             </p>
 
             <p className="text-sm sm:text-base text-muted-foreground mb-6 leading-relaxed">
@@ -113,7 +113,7 @@ export function About() {
             </p>
 
             <p className="text-sm sm:text-base text-muted-foreground mb-8 leading-relaxed">
-              Basé à Madagascar, je suis ouvert aux opportunités de collaboration et aux projets qui me permettront de grandir en tant que développeur.
+              Je suis ouvert aux opportunités de collaboration et aux projets qui me permettront de grandir en tant que développeur.
             </p>
 
             {/* Buttons */}
@@ -126,8 +126,8 @@ export function About() {
                 Me contacter
               </a>
               <a
-                href="/cvfts.pdf"
-                className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-all text-sm sm:text-base"
+                href="/FITAHIANTSOALucOnesineCV.pdf"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-accent text-accent font-semibold hover:bg-accent/10 transition-all"
               >
                 <Download size={20} />
                 Télécharger CV
