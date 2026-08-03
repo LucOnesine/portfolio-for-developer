@@ -13,39 +13,22 @@ import {
   ExternalLink,
   Share2,
 } from 'lucide-react';
-
-interface NavItem {
-  label: string;
-  href: string;
-  icon: React.ReactNode;
-}
-
-const navItems: NavItem[] = [
-  {
-    label: 'Accueil',
-    href: '#home',
-    icon: <Home size={20} />,
-  },
-  {
-    label: 'Compétences',
-    href: '#skills',
-    icon: <Briefcase size={20} />,
-  },
-  {
-    label: 'Projets',
-    href: '#projects',
-    icon: <Code2 size={20} />,
-  },
-  {
-    label: 'Contact',
-    href: '#contact',
-    icon: <Mail size={20} />,
-  },
-];
+import { useApp } from '@/context/AppContext';
+import { translations } from '@/lib/translations';
 
 export function Sidebar() {
+  const { language } = useApp();
+  const tNav = translations[language].nav;
+
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+
+  const navItems = [
+    { label: tNav.home, href: '#home', icon: <Home size={20} /> },
+    { label: tNav.skills, href: '#skills', icon: <Briefcase size={20} /> },
+    { label: tNav.projects, href: '#projects', icon: <Code2 size={20} /> },
+    { label: tNav.contact, href: '#contact', icon: <Mail size={20} /> },
+  ];
 
   return (
     <>
@@ -95,22 +78,30 @@ export function Sidebar() {
 
           {/* Social Links */}
           <div className="border-t border-border pt-6">
-            <p className="text-xs text-muted-foreground mb-4 font-semibold">Suivez-moi</p>
+            <p className="text-xs text-muted-foreground mb-4 font-semibold">
+              {language === 'fr' ? 'Suivez-moi' : 'Follow me'}
+            </p>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://github.com/LucOnesine"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-secondary/60 text-muted-foreground hover:text-accent hover:bg-secondary transition-all"
               >
                 <GitBranch size={18} />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/luc-onesine-fitahiantsoa-a08779306"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-secondary/60 text-muted-foreground hover:text-accent hover:bg-secondary transition-all"
               >
                 <ExternalLink size={18} />
               </a>
               <a
-                href="#"
+                href="https://facebook.com/luc.onesime.3"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-secondary/60 text-muted-foreground hover:text-accent hover:bg-secondary transition-all"
               >
                 <Share2 size={18} />

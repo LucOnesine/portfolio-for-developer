@@ -1,7 +1,10 @@
 'use client';
 
-import { Code2, Database, Smartphone, Zap, Cloud, Users } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { Code2, Database, Zap, Cloud, Users } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
+import { useApp } from '@/context/AppContext';
+import { translations } from '@/lib/translations';
+import { BackgroundCanvas } from './background-canvas';
 
 interface SkillItem {
   name: string;
@@ -10,16 +13,16 @@ interface SkillItem {
 }
 
 interface SkillCategory {
-  title: string;
+  titleKey: string;
   icon: React.ReactNode;
   skills: SkillItem[];
   bgColor: string;
   barColor: string;
 }
 
-const skillCategories: SkillCategory[] = [
+const skillCategoriesData: SkillCategory[] = [
   {
-    title: 'Frontend',
+    titleKey: 'frontend',
     icon: <Code2 size={24} />,
     bgColor: 'from-blue-600 to-blue-500',
     barColor: 'from-blue-400 to-cyan-300',
@@ -32,7 +35,7 @@ const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: 'Frameworks',
+    titleKey: 'frameworks',
     icon: <Zap size={24} />,
     bgColor: 'from-pink-600 to-pink-500',
     barColor: 'from-pink-400 to-rose-300',
@@ -45,19 +48,19 @@ const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: 'Backend',
+    titleKey: 'backend',
     icon: <Database size={24} />,
     bgColor: 'from-purple-600 to-purple-500',
     barColor: 'from-purple-400 to-pink-300',
     skills: [
       { name: 'Node JS', percentage: 85, link: 'https://nodejs.org' },
       { name: 'Python', percentage: 80, link: 'https://www.python.org' },
-      { name: 'Java', percentage: 90, link: 'https://www.Java.org' },
+      { name: 'Java', percentage: 90, link: 'https://www.java.com' },
       { name: 'PHP', percentage: 80, link: 'https://www.php.net' },
     ],
   },
   {
-    title: 'Bases de données',
+    titleKey: 'databases',
     icon: <Database size={24} />,
     bgColor: 'from-green-600 to-green-500',
     barColor: 'from-green-400 to-emerald-300',
@@ -68,7 +71,7 @@ const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: 'DevOps & Outils',
+    titleKey: 'mobileTools',
     icon: <Cloud size={24} />,
     bgColor: 'from-yellow-600 to-yellow-500',
     barColor: 'from-yellow-400 to-orange-300',
@@ -79,7 +82,7 @@ const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: 'Méthodologies',
+    titleKey: 'softSkills',
     icon: <Users size={24} />,
     bgColor: 'from-red-600 to-red-500',
     barColor: 'from-red-400 to-pink-300',
@@ -92,152 +95,106 @@ const skillCategories: SkillCategory[] = [
 ];
 
 export function Skills() {
-
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { language } = useApp();
+  const t = translations[language].skills;
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const element = sectionRef.current;
+    if (!element) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.15 }
+    );
 
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-
-    const particles: Array<{
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      opacity: number;
-    }> = [];
-
-    for (let i = 0; i < 200; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5,
-        opacity: Math.random() * 0.5 + 100,
-      });
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#00d4ff';
-
-      particles.forEach((p) => {
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
-
-        ctx.globalAlpha = p.opacity;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(animate);
-    };
-
-    animate();
+    observer.observe(element);
+    return () => observer.disconnect();
   }, []);
-  
+
+  const categoryTitles: Record<string, string> = {
+    frontend: t.categories.frontend,
+    frameworks: t.categories.frameworks,
+    backend: t.categories.backend,
+    databases: t.categories.databases,
+    mobileTools: t.categories.mobileTools,
+    softSkills: t.categories.softSkills,
+  };
+
   return (
-    <section id="skills" className="relative min-h-screen py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8">
-      {/* Background */}
+    <section id="skills" className="relative py-16 sm:py-20 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Background & Interactive Canvas */}
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
+      <BackgroundCanvas />
 
-      {/* Animated Background */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full opacity-30"
-      />
-
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/10" />
-
-
-      <div className="relative z-10 max-w-7xl mx-auto w-full">
-        <style>{`
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          @keyframes slideBar {
-            from {
-              width: 0;
-            }
-          }
-        `}</style>
-
-        {/* Section Header */}
-        <div className="mb-12 sm:mb-16 md:mb-20 text-center" style={{ animation: 'fadeInUp 8s ease-out' }}>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-            <span className=" text-foreground mb-2">Mes </span>
-            <span className="gradient-text">Compétences</span>
+      <div
+        ref={sectionRef}
+        className={`relative z-10 max-w-7xl mx-auto transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
+        {/* Header */}
+        <div className="text-center mb-12 sm:mb-16 md:mb-20">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
+            <span className="text-foreground">{t.titlePrefix}</span>
+            <span className="gradient-text">{t.titleHighlight}</span>
           </h2>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-2">
+            {t.subtitle}
+          </p>
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {skillCategories.map((category, index) => (
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {skillCategoriesData.map((category, idx) => (
             <div
-              key={category.title}
-              className="p-4 sm:p-6 rounded-lg overflow-hidden"
-              style={{
-                animation: `fadeInUp 6s ease-out ${index * 0.1}s both`,
-                background: `linear-gradient(135deg, hsl(var(--color-start)) 0%, hsl(var(--color-end)) 100%)`,
-              }}
+              key={idx}
+              className="p-6 rounded-2xl border border-border/60 bg-card/70 backdrop-blur-md card-hover hover-lift flex flex-col justify-between"
+              style={{ transitionDelay: `${idx * 100}ms` }}
             >
-              {/* Dynamic gradient header */}
-              <div className={`bg-gradient-to-r ${category.bgColor} p-3 sm:p-4 rounded-lg mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3`}>
-                <div className="text-white text-sm sm:text-base">{category.icon}</div>
-                <h3 className="text-white font-bold text-base sm:text-lg">{category.title}</h3>
-              </div>
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className={`p-3 rounded-xl bg-gradient-to-br ${category.bgColor} text-white shadow-md`}>
+                    {category.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground">
+                    {categoryTitles[category.titleKey] || category.titleKey}
+                  </h3>
+                </div>
 
-              {/* Skills List */}
-              <div className="space-y-3 sm:space-y-4">
-                {category.skills.map((skill) => (
-                  <a
-                    key={skill.name}
-                    href={skill.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group block hover:opacity-80 transition-opacity"
-                  >
-                    {/* Skill Name & Percentage */}
-                    <div className="flex items-center justify-between mb-1.5 sm:mb-2">
-                      <span className="text-white font-semibold text-xs sm:text-sm">{skill.name}</span>
-                      <span className="text-white text-xs sm:text-sm font-bold">{skill.percentage}%</span>
+                <div className="space-y-4">
+                  {category.skills.map((skill, sIdx) => (
+                    <div key={sIdx} className="space-y-1.5">
+                      <div className="flex justify-between items-center text-sm font-medium">
+                        <a
+                          href={skill.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-foreground hover:text-accent transition-colors"
+                        >
+                          {skill.name}
+                        </a>
+                        <span className="text-xs font-bold text-accent">
+                          {isVisible ? `${skill.percentage}%` : '0%'}
+                        </span>
+                      </div>
+                      <div className="h-2.5 w-full bg-secondary/80 rounded-full overflow-hidden p-0.5 border border-border/40">
+                        <div
+                          className={`h-full bg-gradient-to-r ${category.barColor} rounded-full transition-all duration-1000 ease-out`}
+                          style={{
+                            width: isVisible ? `${skill.percentage}%` : '0%',
+                            transitionDelay: `${sIdx * 120 + 200}ms`,
+                          }}
+                        />
+                      </div>
                     </div>
-
-                    {/* Progress Bar */}
-                    <div className="w-full bg-white/20 rounded-full h-1.5 sm:h-2 overflow-hidden">
-                      <div
-                        className={`h-full bg-gradient-to-r ${category.barColor} rounded-full transition-all duration-500`}
-                        style={{
-                          width: `${skill.percentage}%`,
-                          animation: `slideBar 5s ease-out`,
-                        }}
-                      />
-                    </div>
-                  </a>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           ))}

@@ -119,41 +119,39 @@
   --sidebar-ring: #00d4ff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    color-scheme: dark;
-    --background: #0a0e27;
-    --foreground: #ffffff;
-    --card: #141829;
-    --card-foreground: #ffffff;
-    --popover: #141829;
-    --popover-foreground: #ffffff;
-    --primary: #00d4ff;
-    --primary-foreground: #0a0e27;
-    --secondary: #1a1f3a;
-    --secondary-foreground: #ffffff;
-    --muted: #2a2f4a;
-    --muted-foreground: #8b92ad;
-    --accent: #00d4ff;
-    --accent-foreground: #0a0e27;
-    --destructive: #ff4757;
-    --border: #1a1f3a;
-    --input: #141829;
-    --ring: #00d4ff;
-    --chart-1: #00d4ff;
-    --chart-2: #00a8cc;
-    --chart-3: #008fa3;
-    --chart-4: #006a7a;
-    --chart-5: #004551;
-    --sidebar: #0a0e27;
-    --sidebar-foreground: #ffffff;
-    --sidebar-primary: #00d4ff;
-    --sidebar-primary-foreground: #0a0e27;
-    --sidebar-accent: #1a1f3a;
-    --sidebar-accent-foreground: #00d4ff;
-    --sidebar-border: #1a1f3a;
-    --sidebar-ring: #00d4ff;
-  }
+.light {
+  color-scheme: light;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #0284c7;
+  --primary-foreground: #ffffff;
+  --secondary: #e2e8f0;
+  --secondary-foreground: #0f172a;
+  --muted: #cbd5e1;
+  --muted-foreground: #475569;
+  --accent: #0284c7;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: #e2e8f0;
+  --input: #f1f5f9;
+  --ring: #0284c7;
+  --chart-1: #0284c7;
+  --chart-2: #0369a1;
+  --chart-3: #075985;
+  --chart-4: #0c4a6e;
+  --chart-5: #082f49;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #0284c7;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1f5f9;
+  --sidebar-accent-foreground: #0284c7;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #0284c7;
 }
 
 @layer base {
@@ -161,28 +159,55 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
   }
   html {
-    @apply font-sans;
+    @apply font-sans scroll-smooth;
   }
+}
+
+/* Scroll reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1 !important;
+  transform: translate(0, 0) !important;
 }
 
 @layer components {
   .gradient-text {
-    @apply bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent;
   }
 
   .glow-effect {
-    @apply shadow-[0_0_20px_rgba(0,212,255,0.3)];
+    @apply shadow-[0_0_25px_rgba(2,132,199,0.25)] dark:shadow-[0_0_25px_rgba(0,212,255,0.3)];
   }
 
   .hover-lift {
-    @apply transition-transform duration-300 hover:scale-105;
+    @apply transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl;
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:bg-secondary/80 hover:border-accent/50;
+    @apply transition-all duration-300 hover:bg-secondary/80 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/5;
   }
 
   .nav-link {
