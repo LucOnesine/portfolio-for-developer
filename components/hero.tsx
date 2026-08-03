@@ -1,12 +1,12 @@
 'use client';
 
 import { ChevronDown, MessageCircle } from 'lucide-react';
-import Image from 'next/image';
 import { TypeAnimation } from 'react-type-animation';
 import { useApp } from '@/context/AppContext';
 import { translations } from '@/lib/translations';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { BackgroundCanvas } from './background-canvas';
+import { Photo3D } from './photo-3d';
 
 export function Hero() {
   const { language } = useApp();
@@ -65,24 +65,8 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right Image Container */}
-          <div className="relative flex justify-center items-center">
-            <div className="relative w-full max-w-sm sm:max-w-md aspect-square group">
-              {/* Outer Glowing Gradient Border */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-accent via-cyan-400 to-blue-600 rounded-3xl transform -rotate-3 scale-105 transition-transform duration-500 group-hover:rotate-0 group-hover:scale-105 shadow-xl shadow-accent/20" />
-
-              {/* Inner White Container */}
-              <div className="absolute inset-2 bg-card rounded-3xl overflow-hidden shadow-2xl border border-border/50">
-                <Image
-                  src="/fts.jpg"
-                  alt="Luc Onesine FITAHIANTSOA"
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
+          {/* Right Image Container - Interactive 3D Card */}
+          <Photo3D />
         </div>
 
         {/* Scroll Down Indicator */}
