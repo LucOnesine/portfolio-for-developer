@@ -65,7 +65,7 @@ export function Photo3D() {
           style={{ transform: 'translateZ(20px)' }}
         >
           <Image
-            src="/fts.jpg"
+            src="/Onesine.jpeg"
             alt="FITAHIANTSOA Luc Onesine"
             fill
             className="object-cover transition-transform duration-500 scale-105"
